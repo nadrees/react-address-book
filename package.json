@@ -5,5 +5,7 @@
   "repository": "https://github.com/nadrees/react-address-book.git",
   "author": "Nathen Drees <nadrees@gmail.com>",
   "license": "Unlicense",
-  "dependencies": {}
+  "dependencies": {
+    "webpack": "^2.2.1"
+  }
 }

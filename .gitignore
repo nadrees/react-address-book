@@ -1,3 +1,6 @@
+# Output folder for webpack
+dist/
+
 # Logs
 logs
 *.log
