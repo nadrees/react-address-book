@@ -1,0 +1,9 @@
+{
+  "name": "react-address-book",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nadrees/react-address-book.git",
+  "author": "Nathen Drees <nadrees@gmail.com>",
+  "license": "Unlicense",
+  "dependencies": {}
+}
