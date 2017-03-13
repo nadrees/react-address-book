@@ -6,6 +6,12 @@
   "author": "Nathen Drees <nadrees@gmail.com>",
   "license": "Unlicense",
   "dependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.0",
+    "babel-preset-env": "^1.2.1",
     "webpack": "^2.2.1"
+  },
+  "scripts": {
+    "build": "webpack --colors"
   }
 }
