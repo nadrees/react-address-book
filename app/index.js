@@ -6,18 +6,19 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import Subheader from 'material-ui/Subheader';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 import TextField from 'material-ui/TextField';
 
 injectTapEventPlugin();
 
 const Address = (props) => (
-    <tr>
-        <td>{props.name}</td>
-        <td>{props.emailAddress}</td>
-        <td>
-            <button onClick={props.onClick}>Remove</button>
-        </td>
-    </tr>
+    <TableRow>
+        <TableRowColumn>{props.name}</TableRowColumn>
+        <TableRowColumn>{props.emailAddress}</TableRowColumn>
+        <TableRowColumn>
+            <FlatButton label="Remove" onTouchTap={props.onClick} />
+        </TableRowColumn>
+    </TableRow>
 );
 
 class AddAddressForm extends React.Component {
@@ -92,23 +93,24 @@ class AddressBook extends React.Component {
             <div>
                 <AppBar title="Address Book" showMenuIconButton={false} />
                 <AddAddressForm addAddress={this.addAddress}/>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email Address</th>
-                            <th />
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Subheader>Entries</Subheader>
+                <Table>
+                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                        <TableRow>
+                            <TableHeaderColumn>Name</TableHeaderColumn>
+                            <TableHeaderColumn>Email Address</TableHeaderColumn>
+                            <TableHeaderColumn />
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
                     {this.state.entries.map((entry) =>
                         <Address {...entry}
                                  onClick={() => this.removeAddress(entry.emailAddress)}
                                  key={entry.emailAddress}
                         />
                     )}
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
             </div>
         );
     }
