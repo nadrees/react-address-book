@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+import Paper from 'material-ui/Paper';
+import Subheader from 'material-ui/Subheader';
+import TextField from 'material-ui/TextField';
 
-function Address(props) {
-    return (
-        <tr>
-            <td>{props.name}</td>
-            <td>{props.emailAddress}</td>
-            <td>
-                <button onClick={props.onClick}>Remove</button>
-            </td>
-        </tr>
-    );
-}
+injectTapEventPlugin();
+
+const Address = (props) => (
+    <tr>
+        <td>{props.name}</td>
+        <td>{props.emailAddress}</td>
+        <td>
+            <button onClick={props.onClick}>Remove</button>
+        </td>
+    </tr>
+);
 
 class AddAddressForm extends React.Component {
     constructor() {
@@ -26,23 +33,18 @@ class AddAddressForm extends React.Component {
 
     render() {
         return (
-            <form>
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="name" placeholder="New Name"
-                           onChange={(event) => this.handleOnChange(event, 'name')}
-                           value={this.state.name} />
-                </div>
-                <div>
-                    <label htmlFor="emailAddress">Email Address</label>
-                    <input type="email" id="emailAddress" placeholder="Email Address"
-                           onChange={(event) => this.handleOnChange(event, 'emailAddress')}
-                           value={this.state.emailAddress} />
-                </div>
-                <div>
-                    <button onClick={this.handleOnClick} disabled={!this.getFormIsValid()}>Add</button>
-                </div>
-            </form>
+            <Paper zDepth={1}>
+                <Subheader>Add New Entry</Subheader>
+                <TextField hintText="Your Name" floatingLabelText="Name" className="input-field"
+                           value={this.state.name}
+                           onChange={(event) => this.handleOnChange(event, 'name')} />
+                <TextField hintText="sample@example.com" floatingLabelText="Email Address" className="input-field"
+                           value={this.state.emailAddress}
+                           onChange={(event) => this.handleOnChange(event, 'emailAddress')} />
+                <FlatButton className="input-field" label="Add" primary={true}
+                            onTouchTap={this.handleOnClick}
+                            disabled={!this.getFormIsValid()} />
+            </Paper>
         );
     }
 
@@ -88,7 +90,7 @@ class AddressBook extends React.Component {
     render() {
         return (
             <div>
-                <h1>Address Book</h1>
+                <AppBar title="Address Book" showMenuIconButton={false} />
                 <AddAddressForm addAddress={this.addAddress}/>
                 <table>
                     <thead>
@@ -125,7 +127,13 @@ class AddressBook extends React.Component {
     }
 }
 
+const App = () => (
+    <MuiThemeProvider>
+        <AddressBook/>
+    </MuiThemeProvider>
+);
+
 ReactDOM.render(
-    <AddressBook/>,
+    <App/>,
     document.getElementById('container')
 );
